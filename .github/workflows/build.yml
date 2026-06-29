@@ -14,10 +14,9 @@ jobs:
       - run: npm install
       - run: npm run electron:build
         env:
+          ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES: true
+          PUBLISH_FOR_PULL_REQUEST: false
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          EP_DRAFT: true
-          EP_PRE_RELEASE: true
-          CSC_IDENTITY_AUTO_DISCOVERY: false
       - uses: actions/upload-artifact@v4
         with:
           name: windows-build
@@ -33,10 +32,9 @@ jobs:
       - run: npm install
       - run: npm run electron:build
         env:
+          ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES: true
+          PUBLISH_FOR_PULL_REQUEST: false
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          EP_DRAFT: true
-          EP_PRE_RELEASE: true
-          CSC_IDENTITY_AUTO_DISCOVERY: false
       - uses: actions/upload-artifact@v4
         with:
           name: mac-build
