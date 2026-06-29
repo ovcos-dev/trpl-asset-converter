@@ -63,7 +63,7 @@ app.whenReady().then(() => {
             }
         }
         const outputBuffer = await pipeline
-            .png({ effort: 10 })
+            .png({ effort: 10, compressionLevel: 9 })
             .toColourspace('srgb')
             .toBuffer()
         return {
