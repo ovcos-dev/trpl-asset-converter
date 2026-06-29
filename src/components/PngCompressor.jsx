@@ -18,7 +18,7 @@ async function getImageSize(file) {
 
 function PngCompressor() {
     const [files, setFiles] = useState([])
-
+    const [quality, setQuality] = useState(97)
 
     const [resize, setResize] = useState(null)
     const [results, setResults] = useState([])
@@ -59,6 +59,7 @@ function PngCompressor() {
                     buffer: arrayBuffer,
                     dithering: 1.0,
                     resize: resizeOption,
+                    quality,
                 })
                 const blob = new Blob([result.buffer], { type: 'image/png' })
                 setResults(prev => [...prev, {
@@ -135,6 +136,25 @@ function PngCompressor() {
                         onChange={(e) => setSuffix(e.target.value)}
                         placeholder="예: _compressed"
                         style={{ flex: 1, padding: '6px 10px', border: '1px solid #E5E8EB', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }}
+                    />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                    <span style={{ fontSize: '14px', fontWeight: 500, color: '#333D4B', minWidth: '28px' }}>품질</span>
+                    <input
+                        type="range"
+                        min="1"
+                        max="100"
+                        value={quality}
+                        onChange={(e) => setQuality(Number(e.target.value))}
+                        style={{ flex: 1, accentColor: '#3182F6' }}
+                    />
+                    <input
+                        type="number"
+                        min="1"
+                        max="100"
+                        value={quality}
+                        onChange={(e) => setQuality(Math.min(100, Math.max(1, Number(e.target.value))))}
+                        style={{ width: '52px', textAlign: 'center', padding: '4px 6px', border: '1px solid #E5E8EB', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }}
                     />
                 </div>
                 <ResizeOptions onChange={setResize} />

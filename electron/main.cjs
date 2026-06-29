@@ -45,6 +45,7 @@ app.whenReady().then(() => {
         const sharp = require('sharp')
         const inputBuffer = Buffer.from(buffer)
         let pipeline = sharp(inputBuffer)
+
         if (resize) {
             if (resize.percent) {
                 const meta = await sharp(inputBuffer).metadata()
@@ -62,14 +63,24 @@ app.whenReady().then(() => {
                 })
             }
         }
+
+
         const outputBuffer = await pipeline
-            .png({ effort: 10, compressionLevel: 9 })
-            .toColourspace('srgb')
+            .png({
+                effort: 10,
+                compressionLevel: 9,
+                palette: true,
+                quality,
+                dither: 1.0
+            })
             .toBuffer()
+
+        const finalBuffer = outputBuffer.length < inputBuffer.length ? outputBuffer : inputBuffer
+
         return {
-            buffer: outputBuffer,
+            buffer: finalBuffer,
             origSize: inputBuffer.length,
-            newSize: outputBuffer.length,
+            newSize: finalBuffer.length,
         }
     })
 
@@ -95,9 +106,9 @@ app.whenReady().then(() => {
             }
         }
         const outputBuffer = await pipeline
-            .png({ effort: 10 })
-            .toColourspace('srgb')
+            .webp({ quality })
             .toBuffer()
+
         return {
             buffer: outputBuffer,
             origSize: inputBuffer.length,

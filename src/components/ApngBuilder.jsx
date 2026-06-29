@@ -20,8 +20,8 @@ function ApngBuilder() {
     const [frames, setFrames] = useState([])
     const [delay, setDelay] = useState(100)
     const [loops, setLoops] = useState(0)
-    const [quality, setQuality] = useState(95)
-    const [unlockLow, setUnlockLow] = useState(false)
+
+
     const [skipFirst, setSkipFirst] = useState(false)
     const [resize, setResize] = useState(null)
     const [result, setResult] = useState(null)
@@ -86,7 +86,7 @@ function ApngBuilder() {
                 frameBuffers.push(ab)
             }
 
-            const actualQuality = unlockLow ? quality : Math.max(quality, 80)
+
             const resizeOption = resize?.percent
                 ? { percent: resize.percent }
                 : (resize?.width || resize?.height)
@@ -98,7 +98,7 @@ function ApngBuilder() {
 
             const result = await ipcRenderer.invoke('compress-frames', {
                 frames: frameBuffers,
-                quality: actualQuality,
+
                 dithering: 1.0,
                 resize: resizeOption,
                 delays,
@@ -231,46 +231,7 @@ function ApngBuilder() {
                             />
                             <span style={{ fontSize: '12px', color: '#8B95A1' }}>0 = 무한반복</span>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                            <span style={{ fontSize: '14px', fontWeight: 500, color: '#333D4B', minWidth: '28px' }}>품질</span>
-                            <input
-                                type="range"
-                                min="1"
-                                max="100"
-                                value={quality}
-                                onChange={(e) => {
-                                    const val = Number(e.target.value)
-                                    setQuality(unlockLow ? val : Math.max(val, 80))
-                                }}
-                                style={{ flex: 1, accentColor: '#3182F6' }}
-                            />
-                            <input
-                                type="number"
-                                min="1"
-                                max="100"
-                                value={unlockLow ? quality : Math.max(quality, 80)}
-                                onChange={(e) => {
-                                    const val = Math.min(100, Math.max(1, Number(e.target.value)))
-                                    setQuality(unlockLow ? val : Math.max(val, 80))
-                                }}
-                                style={{ width: '52px', textAlign: 'center', padding: '4px 6px', border: '1px solid #E5E8EB', borderRadius: '8px', fontSize: '13px', fontFamily: 'inherit' }}
-                            />
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <input
-                                type="checkbox"
-                                id="unlockLow-apng"
-                                checked={unlockLow}
-                                onChange={(e) => {
-                                    setUnlockLow(e.target.checked)
-                                    if (!e.target.checked) setQuality(Math.max(quality, 80))
-                                }}
-                                style={{ width: '15px', height: '15px', accentColor: '#3182F6', cursor: 'pointer' }}
-                            />
-                            <label htmlFor="unlockLow-apng" style={{ fontSize: '14px', color: '#333D4B', cursor: 'pointer' }}>
-                                80 이하 품질 허용 (품질 저하 주의)
-                            </label>
-                        </div>
+
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                             <input
                                 type="checkbox"
