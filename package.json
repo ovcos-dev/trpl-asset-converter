@@ -41,7 +41,10 @@
   "build": {
     "appId": "com.png-tool.app",
     "productName": "trpl Asset Converter",
-    "publish": null,
+    "publish": {
+      "provider": "generic",
+      "url": ""
+    },
     "directories": {
       "output": "release"
     },
