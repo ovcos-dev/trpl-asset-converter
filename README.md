@@ -30,6 +30,8 @@ PNG 압축, WebP 변환, APNG 생성을 위한 데스크탑 앱
 #### macOS 손상 오류 해결
 터미널을 열고 아래 명령어를 실행하세요.
 
+> 터미널 여는 방법: `Command + Space` → "터미널" 검색 후 실행
+
 ```bash
 xattr -cr /Applications/trpl\ Asset\ Converter.app
 ```
