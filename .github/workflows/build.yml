@@ -12,10 +12,9 @@ jobs:
         with:
           node-version: 20
       - run: npm install
-      - run: npm run electron:build
+      - run: npm run build
+      - run: npx electron-builder --publish=never
         env:
-          ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES: true
-          PUBLISH_FOR_PULL_REQUEST: false
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-artifact@v4
         with:
@@ -30,10 +29,9 @@ jobs:
         with:
           node-version: 20
       - run: npm install
-      - run: npm run electron:build
+      - run: npm run build
+      - run: npx electron-builder --publish=never
         env:
-          ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES: true
-          PUBLISH_FOR_PULL_REQUEST: false
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-artifact@v4
         with:
