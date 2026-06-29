@@ -39,14 +39,15 @@
     "wait-on": "^9.0.10"
   },
   "build": {
-    "appId": "com.trpl-asset-converter.app",
-    "productName": "[trpl] Asset Converter",
+    "appId": "com.png-tool.app",
+    "productName": "trpl Asset Converter",
     "directories": {
-      "output": "C:\\builds\\trpl"
+      "output": "release"
     },
     "files": [
       "dist/**/*",
-      "electron/**/*"
+      "electron/**/*",
+      "node_modules/**/*"
     ],
     "win": {
       "target": "portable",
