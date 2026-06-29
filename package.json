@@ -47,7 +47,8 @@
     "publish": {
       "provider": "github",
       "owner": "ovcos-dev",
-      "repo": "trpl-asset-converter"
+      "repo": "trpl-asset-converter",
+      "releaseType": "release"
     },
     "files": [
       "dist/**/*",
