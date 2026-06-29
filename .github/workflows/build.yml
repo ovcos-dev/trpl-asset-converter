@@ -15,6 +15,9 @@ jobs:
       - run: npm run electron:build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EP_DRAFT: true
+          EP_PRE_RELEASE: true
+          CSC_IDENTITY_AUTO_DISCOVERY: false
       - uses: actions/upload-artifact@v4
         with:
           name: windows-build
@@ -31,6 +34,9 @@ jobs:
       - run: npm run electron:build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EP_DRAFT: true
+          EP_PRE_RELEASE: true
+          CSC_IDENTITY_AUTO_DISCOVERY: false
       - uses: actions/upload-artifact@v4
         with:
           name: mac-build
