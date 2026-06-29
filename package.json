@@ -44,6 +44,11 @@
     "directories": {
       "output": "release"
     },
+    "publish": {
+      "provider": "github",
+      "owner": "ovcos-dev",
+      "repo": "trpl-asset-converter"
+    },
     "files": [
       "dist/**/*",
       "electron/**/*",
